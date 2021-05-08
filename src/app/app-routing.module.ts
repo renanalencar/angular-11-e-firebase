@@ -10,7 +10,12 @@ const routes: Routes = [
   {
     path: 'admin/painel', loadChildren: () => import('./components/admin/painel/painel.module')
       .then(m => m.PainelModule), canActivate: [AuthguardService]
-  },];
+  },
+  {
+    path: 'admin/departamento', loadChildren: () => import('./components/admin/departamento/departamento.module')
+      .then(m => m.DepartamentoModule), canActivate: [AuthguardService]
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
