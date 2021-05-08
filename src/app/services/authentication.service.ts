@@ -25,4 +25,8 @@ export class AuthenticationService {
   resetPassword(email: string) {
     return this.afAuth.sendPasswordResetEmail(email)
   }
+
+  authUser(): Observable<firebase.User> {
+    return this.user;
+  }
 }

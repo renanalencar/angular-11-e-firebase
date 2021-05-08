@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     try {
       if (this.email == undefined || this.senha == undefined) {
         this.mensagem = 'Usuário ou senha vazios';
-        return
+        return;
       }
       this.authServ.login(this.email, this.senha).then(() => { this.router.navigate(['/admin/painel']) })
         .catch(erro => {

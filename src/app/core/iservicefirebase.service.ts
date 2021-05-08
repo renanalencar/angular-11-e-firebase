@@ -8,12 +8,12 @@ import { Model } from './model';
 
 export abstract class ServiceFirebase<T extends Model> implements
     ICrud<T> {
-        
+
     ref!: AngularFirestoreCollection<T>;
 
-    constructor(protected type: { new(): T; }, protected firestore:
-        AngularFirestore, public path: string) {
-        this.ref = this.firestore.collection<T>(this.path);
+    constructor(protected myType: { new(): T; }, protected firestore:
+        AngularFirestore, public caminho: string) {
+        this.ref = this.firestore.collection<T>(this.caminho);
     }
 
     get(id: string): Observable<T> {
@@ -23,35 +23,36 @@ export abstract class ServiceFirebase<T extends Model> implements
     list(): Observable<T[]> {
         return this.ref.valueChanges();
     }
-    createOrUpdate(item: T): Promise<T> {
+    createOrUpdate(item: T): Promise<any> {
         let id = item.id;
         if (!item)
-            return
+            return;
+
         let obj: object | null = null;
 
-        if (item instanceof this.type)
+        if (item instanceof this.myType)
             obj = item.toObject();
         else
             obj = item;
         if (id) {
-            return this.ref.doc(id).set(obj);
+            return this.ref.doc(id).set(<any>obj);
         }
         else
-            return this.ref.add(obj).then(res => {
+            return this.ref.add(<any>obj).then(res => {
                 obj.id = res.id;
-                this.ref.doc(res.id).set(obj);
-            })
+                this.ref.doc(res.id).set(<any>obj);
+            });
     }
     delete(id: string): Promise<void> {
         return this.ref.doc(id).delete();
     }
 
-    docToClass(snapshotDoc): T {
+    docToClass(snapshotDoc: any): T {
         let obj = {
             id: snapshotDoc.id,
             ...(snapshotDoc.data() as T)
-        }
-        let typed = plainToClass(this.type, obj)
+        };
+        let typed = plainToClass(this.myType, obj);
         return typed;
     }
 
