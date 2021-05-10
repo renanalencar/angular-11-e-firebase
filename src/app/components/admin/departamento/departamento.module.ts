@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ComumModule } from 'src/app/modules/comum/comum.module';
 
 import { DepartamentoRoutingModule } from './departamento-routing.module';
 import { DepartamentoComponent } from './departamento.component';
 
-
 @NgModule({
   declarations: [DepartamentoComponent],
   imports: [
-    CommonModule,
+    ComumModule,
+    ReactiveFormsModule,
     DepartamentoRoutingModule
   ]
 })

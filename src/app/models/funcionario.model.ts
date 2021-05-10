@@ -5,6 +5,7 @@ export class Funcionario extends Model {
     nome!: string;
     funcao!: string;
     email!: string;
-    ultimoAcesso!: Date;
+    foto!: string;
+    ultimoAcesso!: any;
     departamento!: Departamento;
 }

@@ -14,13 +14,13 @@ export class MenuComponent implements OnInit {
   user!: Observable<firebase.User>;
   constructor(private authServ: AuthenticationService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.user = this.authServ.authUser();
   }
 
   sair() {
-    this.authServ.logout().then(() => this.router.navigate(['/'])
-    );
+    this.authServ.logout().then(() => this.router.navigate(['/']));
   }
+
 
 }

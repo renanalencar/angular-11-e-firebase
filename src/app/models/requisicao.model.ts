@@ -12,9 +12,10 @@ export class Requisicao extends Model {
     movimentacoes!: Movimentacao[];
 }
 
+
 export class Movimentacao extends Model {
     funcionario!: Funcionario;
-    dataHora!: Date;
+    dataHora: any;
     status!: string
     descricao!: string;
 }

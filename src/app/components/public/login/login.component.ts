@@ -14,24 +14,28 @@ export class LoginComponent implements OnInit {
   senha!: string;
   mensagem!: string;
   emailEnviado!: boolean;
-
   constructor(private authServ: AuthenticationService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
   }
 
   logar() {
     try {
-      if (this.email == undefined || this.senha == undefined) {
-        this.mensagem = 'Usuário ou senha vazios';
-        return;
+      if (this.email == undefined ||
+        this.senha == undefined) {
+        this.mensagem = 'Usuário ou senha vazios'
+        return
       }
-      this.authServ.login(this.email, this.senha).then(() => { this.router.navigate(['/admin/painel']) })
+      this.authServ.login(this.email, this.senha)
+        .then(() => {
+          this.router.navigate(['/admin/painel'])
+        })
         .catch(erro => {
           let detalhes = '';
           switch (erro.code) {
             case 'auth/user-not-found': {
-              detalhes = 'Não existe usuário para o email informado ';
+              detalhes = 'Não existe usuário para o email informado';
               break;
             }
             case 'auth/invalid-email': {
@@ -52,6 +56,7 @@ export class LoginComponent implements OnInit {
     } catch (erro) {
       this.mensagem = `Erro ao logar. Detalhes: ${erro}`;
     }
+
   }
 
   async enviaLink() {
