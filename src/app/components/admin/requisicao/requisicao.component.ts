@@ -70,12 +70,10 @@ export class RequisicaoComponent implements OnInit {
     this.form.reset();
     this.edit = false;
     this.displayDialogRequisicao = true;
-    debugger
     this.setValorPadrao();
   }
 
   setValorPadrao() {
-    debugger
     this.form.patchValue({
       solicitante: this.funcionarioLogado,
       status: 'Aberto',
