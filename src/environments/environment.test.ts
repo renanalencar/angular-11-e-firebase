@@ -1,7 +1,7 @@
 import { environmentConfig } from 'src/config/environment.config';
 
 export const environment = {
-  production: true,
+  production: false,
   firebase: {
     apiKey: environmentConfig.firebase.apiKey,
     authDomain: environmentConfig.firebase.authDomain,
